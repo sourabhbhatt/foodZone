@@ -1,67 +1,80 @@
 // CheckoutPage.js
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Alert} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+import {setCartInfo} from '../../redux/slices/userSlice';
+import Modal from 'react-native-modal';
+import LottieView from 'lottie-react-native';
+import {FONTS, ROUTES} from '../../config';
+import {Button} from '../../components';
 
-const CheckoutPage = () => {
+const CheckoutPage = ({navigation}) => {
   const dispatch = useDispatch();
   const cartInfo = useSelector(state => state?.user?.cartInfo);
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
 
-  // Group items by restaurantId
+  // Group items by restaurantName
   const groupedItems = {};
   cartInfo.forEach(item => {
-    if (!groupedItems[item.restaurantId]) {
-      groupedItems[item.restaurantId] = [];
+    if (!groupedItems[item.restaurantName]) {
+      groupedItems[item.restaurantName] = [];
     }
-    groupedItems[item.restaurantId].push({name: item.name, price: item.price});
+    groupedItems[item.restaurantName].push({
+      name: item.name,
+      price: item.price,
+    });
   });
 
-  // Calculate total price
   const totalPrice = cartInfo.reduce((total, item) => total + item.price, 0);
 
-  // Function to handle payment
   const handlePayment = () => {
-    // Show payment success popup
     setShowPaymentPopup(true);
-
-    // Dispatch an action to remove data from Redux
-    // dispatch({type: 'REMOVE_CART_ITEMS'}); // Replace 'REMOVE_CART_ITEMS' with your actual action type
+    setTimeout(() => {
+      dispatch(setCartInfo([]));
+      setShowPaymentPopup(false);
+      navigation.navigate(ROUTES.HOME);
+    }, 3000);
   };
 
   return (
-    <View style={styles.container}>
-      {Object.keys(groupedItems).map(restaurantId => (
-        <View key={restaurantId} style={styles.restaurantContainer}>
-          <Text style={styles.restaurantTitle}>
-            Restaurant ID: {restaurantId}
-          </Text>
-          <View style={styles.itemContainer}>
-            {groupedItems[restaurantId].map((item, index) => (
-              <View key={index} style={styles.itemRow}>
-                <Text>{item.name}</Text>
-                <Text>${item.price}</Text>
-              </View>
-            ))}
+    <>
+      <View style={styles.container}>
+        {Object.keys(groupedItems).map(restaurantName => (
+          <View key={restaurantName} style={styles.restaurantContainer}>
+            <Text style={styles.restaurantTitle}>
+              {`Restaurant : ${restaurantName}`}
+            </Text>
+            <View style={styles.itemContainer}>
+              {groupedItems[restaurantName].map((item, index) => (
+                <View key={index} style={styles.itemRow}>
+                  <Text style={styles.text}>{item.name}</Text>
+                  <Text style={styles.text}>₹{item.price}</Text>
+                </View>
+              ))}
+            </View>
           </View>
+        ))}
+        <View>
+          <View style={styles.row}>
+            <Text style={styles.totalText}>Grand Total: </Text>
+            <Text style={styles.totalText}>Grand Total: ₹{totalPrice}</Text>
+          </View>
+          <Button title="Make Payment" onPress={handlePayment} />
         </View>
-      ))}
-
-      {/* Grand total */}
-      <Text style={styles.totalText}>Grand Total: ${totalPrice}</Text>
-
-      {/* Make payment button */}
-      <View style={styles.buttonContainer}>
-        <Button title="Make Payment" onPress={handlePayment} />
       </View>
-
       {/* Payment success popup */}
-      {showPaymentPopup && (
+      <Modal isVisible={showPaymentPopup}>
         <View style={styles.paymentPopup}>
-          <Text>Payment Successful!</Text>
+          <LottieView
+            source={require('../../assets/updateApp.json')}
+            autoPlay
+            loop
+            style={{width: 200, height: 200}}
+          />
+          <Text style={styles.paymentPopupText}>Payment Successful!</Text>
         </View>
-      )}
-    </View>
+      </Modal>
+    </>
   );
 };
 
@@ -69,13 +82,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    justifyContent: 'space-between',
   },
   restaurantContainer: {
     marginBottom: 20,
   },
   restaurantTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: FONTS.SEMIBOLD,
     marginBottom: 10,
   },
   itemContainer: {
@@ -88,6 +102,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 5,
   },
+  text: {
+    fontSize: 14,
+    fontFamily: FONTS.REGULAR,
+  },
   totalText: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -99,14 +117,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   paymentPopup: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
-    elevation: 5,
-    transform: [{translateX: -50}, {translateY: -50}],
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  paymentPopupText: {
+    fontSize: 18,
+    fontFamily: FONTS.SEMIBOLD,
+    marginBottom: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 10,
   },
 });
 

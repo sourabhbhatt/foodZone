@@ -1,8 +1,9 @@
 import React from 'react';
-import {StarRating, showToastMessage} from '../../components';
-import {COLORS, FONTS, IMAGES, ROUTES} from '../../config';
-import {Text, TouchableOpacity, StyleSheet, Image, View} from 'react-native';
+import {isIOS} from '../../utils';
+import {StarRating} from '../../components';
+import {COLORS, FONTS, ROUTES} from '../../config';
 import {useNavigation} from '@react-navigation/native';
+import {Text, TouchableOpacity, StyleSheet, Image, View} from 'react-native';
 
 const RestaurantCard = ({restaurant}) => {
   const navigation = useNavigation();
@@ -19,7 +20,7 @@ const RestaurantCard = ({restaurant}) => {
       <View style={styles.infoContainer}>
         <View style={styles.header}>
           <Text style={styles.restaurantName}>{restaurant.name}</Text>
-          <StarRating rating={restaurant.rating.average} />
+          <StarRating rating={restaurant.rating.average} ratingFont={20} />
         </View>
         <Text style={styles.text}>{`Cuisine: ${restaurant.cuisine.join(
           ', ',
@@ -41,26 +42,21 @@ const RestaurantCard = ({restaurant}) => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
     borderWidth: 1,
     borderRadius: 5,
     borderColor: COLORS.BORDER,
     marginBottom: 10,
   },
-  heartContainer: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    zIndex: 1,
-  },
-  heartIcon: {
-    width: 20,
-    height: 20,
+  shadow: {
+    shadowColor: '#171717',
+    shadowOffset: {width: 1, height: 3},
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: isIOS ? 0 : 2,
   },
   image: {
-    width: 120,
-    height: 120,
+    width: '100%',
+    height: 250,
     borderRadius: 5,
   },
   infoContainer: {
@@ -73,17 +69,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   restaurantName: {
-    fontSize: 16,
+    fontSize: 18,
     color: COLORS.TITLE,
-    fontFamily: FONTS.BOLD,
+    fontFamily: FONTS.SEMIBOLD,
     lineHeight: 20,
     marginTop: 5,
   },
   text: {
-    fontSize: 13,
+    fontSize: 14,
     color: COLORS.SUB_TITLE,
     lineHeight: 17,
-    fontFamily: FONTS.REGULAR,
+    fontFamily: FONTS.MEDIUM,
     marginTop: 5,
   },
 });

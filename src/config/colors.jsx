@@ -3,6 +3,8 @@ const COLORS = {
   TITLE: '#242426',
   SUB_TITLE: '#707070',
   BORDER: '#EFEFEF',
+  YELLOW: '#FFCB05',
+  RED: '#ff4545',
 
   // Custom Colors
   PINK: '#EC407A',

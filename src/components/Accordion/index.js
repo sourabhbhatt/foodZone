@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {width} from '../../utils';
+import {COLORS, FONTS} from '../../config';
 
 const Accordion = ({
   title = 'No Title Available',
@@ -26,34 +27,24 @@ const Accordion = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: width,
     backgroundColor: '#fff',
     elevation: 1,
+    marginBottom: 10,
   },
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
+    backgroundColor: COLORS.DEFAULT,
     borderBottomColor: '#E0E0E0',
     padding: 8,
     paddingHorizontal: 20,
+    borderRadius: 5,
   },
   title: {
     fontSize: 17,
-  },
-  descriptionContainer: {
-    backgroundColor: '#fff',
-    elevation: 1,
-    padding: 8,
-    paddingHorizontal: 20,
-    marginVertical: 2,
-  },
-  description: {
-    fontSize: 17,
-    color: '#546E7A',
-    letterSpacing: 1,
-    lineHeight: 24,
+    fontFamily: FONTS.MEDIUM,
   },
 });
 

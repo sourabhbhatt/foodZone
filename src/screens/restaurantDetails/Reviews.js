@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {StarRating} from '../../components';
+import {COLORS, FONTS} from '../../config';
 
 const Reviews = ({reviews}) => {
   return (
@@ -22,15 +23,14 @@ export default Reviews;
 
 const styles = StyleSheet.create({
   container: {
-    // borderWidth: 1,
-    borderColor: '#ccc',
+    borderTopWidth: 2,
+    borderColor: COLORS.BORDER,
     borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
+    margin: 10,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: FONTS.MEDIUM,
     marginTop: 15,
     marginBottom: 10,
     color: '#333',

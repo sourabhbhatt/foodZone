@@ -1,39 +1,42 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {Accordion, Button} from '../../components';
+import {Accordion, Button, showToastMessage} from '../../components';
 import {COLORS, FONTS, ROUTES} from '../../config';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCartInfo} from '../../redux/slices/userSlice';
 import {useNavigation} from '@react-navigation/native';
 
-const Menu = ({menuItems}) => {
+const Menu = ({menuItems, restaurantName}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const cartInfo = useSelector(state => state?.user?.cartInfo);
 
   const addToCart = item => {
-    const updatedItem = cartInfo?.find(e => e.id === item.id);
+    const updatedItem = cartInfo?.find(e => e?.id === item?.id);
     if (updatedItem) {
-      updatedItem.quantity = updatedItem.quantity + 1;
-      const newCartInfo = cartInfo.map(e =>
-        e.id === item.id ? updatedItem : e,
-      );
-      dispatch(setCartInfo(newCartInfo));
+      showToastMessage({
+        message: 'Item already added to cart',
+        type: 'info',
+      });
       return;
     }
-    const newCartInfo = [...cartInfo, {...item, quantity: 1}];
+    const newCartInfo = [...cartInfo, {...item, quantity: 1, restaurantName}];
     dispatch(setCartInfo(newCartInfo));
+    showToastMessage({
+      message: 'Item added to cart',
+      type: 'info',
+    });
   };
 
   const checkIfAlreadyAddedToCart = item => {
-    const updatedItem = cartInfo?.find(e => e.id === item.id);
-    return !!updatedItem;
+    const updatedItem = cartInfo?.find(e => e?.id === item?.id);
+    return !!updatedItem || false;
   };
 
   const navigateToCart = () => navigation.navigate(ROUTES.CART);
 
   return (
-    <View>
+    <View style={styles.container}>
       {menuItems.map((item, index) => (
         <Accordion title={item?.name} key={index}>
           {item?.data?.map((data, i) => (
@@ -46,12 +49,20 @@ const Menu = ({menuItems}) => {
                 </View>
               </View>
               <Button
-                rightIcon={checkIfAlreadyAddedToCart() ? 'check' : 'cart'}
+                iconType={
+                  checkIfAlreadyAddedToCart(data) ? 'Entypo' : 'AntDesign'
+                }
+                iconSize={18}
+                rightIcon={
+                  checkIfAlreadyAddedToCart(data)
+                    ? 'chevron-right'
+                    : 'shoppingcart'
+                }
                 title={
-                  checkIfAlreadyAddedToCart() ? 'View Cart' : 'Add to Cart'
+                  checkIfAlreadyAddedToCart(data) ? 'View Cart' : 'Add to Cart'
                 }
                 onPress={() => {
-                  checkIfAlreadyAddedToCart()
+                  checkIfAlreadyAddedToCart(data)
                     ? navigateToCart()
                     : addToCart(data);
                 }}
@@ -67,16 +78,19 @@ const Menu = ({menuItems}) => {
 export default Menu;
 
 const styles = StyleSheet.create({
+  container: {
+    margin: 10,
+  },
   menuItem: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 10,
     backgroundColor: COLORS.WHITE,
     borderWidth: 1,
     borderColor: COLORS.BORDER,
     borderRadius: 5,
+    marginTop: 10,
   },
   left: {
     flex: 1,

@@ -1,5 +1,7 @@
-import {Dimensions} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 export const {width, height} = Dimensions.get('window');
+
+export const isIOS = Platform.OS === 'ios';
 
 export const formatCurrency = amount => {
   return `$${amount.toFixed(2)}`;

@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import Icon from '../Icons';
 import {COLORS} from '../../config';
 
-const StarRating = ({rating = 0, ratingFont = 15}) => {
+const StarRating = ({rating = 0, ratingFont = 20}) => {
   const totalStars = 5;
   const starIcons = [];
 
@@ -56,8 +56,9 @@ const styles = {
     alignItems: 'center',
   },
   star: {
-    color: COLORS.PRIMARY,
+    color: COLORS.YELLOW,
     fontSize: 25,
+    marginRight: 2,
   },
 };
 

@@ -8,7 +8,7 @@ import {
   Easing,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import {FONTS} from '../../config';
+import {COLORS, FONTS} from '../../config';
 
 const MenuFAB = ({menuItems, onMenuItemPress}) => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -35,20 +35,32 @@ const MenuFAB = ({menuItems, onMenuItemPress}) => {
         key={index}
         style={styles.menuItem}
         onPress={() => {
-          onMenuItemPress(item);
+          onMenuItemPress(item, index);
           toggleMenu();
         }}>
-        <Text>{item.name}</Text>
-        <Text>({item.count})</Text>
+        <Text
+          style={[
+            styles.text,
+            {
+              textDecorationLine: 'underline',
+            },
+          ]}>
+          {item.name}
+        </Text>
+        <Text style={styles.text}>({item.count})</Text>
       </TouchableOpacity>
     ));
   };
 
   return (
     <View style={styles.container}>
-      <Modal isVisible={menuVisible} style={{margin: 0}}>
+      <Modal
+        isVisible={menuVisible}
+        style={{margin: 0}}
+        onBackdropPress={() => setMenuVisible(false)}>
         <View style={[styles.menu]}>
           <Text style={styles.menuTitle}>{`Your Personalized picks`} </Text>
+          <View style={styles.divider} />
           {renderMenuItems()}
         </View>
         <TouchableOpacity style={styles.fab} onPress={toggleMenu}>
@@ -75,7 +87,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: 'blue',
+    backgroundColor: COLORS.PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 20,
@@ -85,7 +97,7 @@ const styles = StyleSheet.create({
   fabText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: FONTS.MEDIUM,
   },
   menu: {
     position: 'absolute',
@@ -103,6 +115,16 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.SEMIBOLD_ITALIC,
     margin: 10,
     color: '#333',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: COLORS.BORDER,
+    marginVertical: 2,
+  },
+  text: {
+    fontSize: 16,
+    fontFamily: FONTS.MEDIUM,
+    color: COLORS.BLUE,
   },
   menuItem: {
     paddingVertical: 8,

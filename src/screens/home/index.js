@@ -19,8 +19,8 @@ const Home = ({navigation}) => {
     navigation.setOptions({
       headerLeft: () => (
         <Icon
+          type="AntDesign"
           name="logout"
-          size={30}
           color={COLORS.PRIMARY}
           onPress={onLogout}
         />
@@ -31,7 +31,7 @@ const Home = ({navigation}) => {
           type="AntDesign"
           name="shoppingcart"
           onPress={() => navigation.navigate(ROUTES.CART)}
-          size={30}
+          size={25}
           color={COLORS.PRIMARY}
         />
       ),
@@ -59,11 +59,14 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Image source={IMAGES.LOGO} style={styles.image} />
       <FlatList
         data={restaurants}
         keyExtractor={item => item.id}
+        ListHeaderComponent={
+          <Image source={IMAGES.LOGO} style={styles.image} />
+        }
         renderItem={({item}) => <RestaurantCard restaurant={item} />}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.restaurantList}
       />
     </View>
@@ -78,10 +81,10 @@ const styles = StyleSheet.create({
   },
   restaurantList: {paddingBottom: 20},
   image: {
-    width: 150,
-    height: 150,
+    width: '100%',
+    height: 200,
     alignSelf: 'center',
-    marginBottom: 20,
+    resizeMode: 'contain',
   },
 });
 

@@ -7,3 +7,4 @@ export {default as StarRating} from './StarRating';
 export {default as MenuFAB} from './MenuFAB';
 export {default as ImageCarousel} from './ImageCarousel';
 export {default as Accordion} from './Accordion';
+export {default as Icon} from './Icons';

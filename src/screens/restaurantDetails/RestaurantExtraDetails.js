@@ -1,12 +1,13 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Accordion} from '../../components';
+import {COLORS, FONTS} from '../../config';
 
 const RestaurantExtraDetails = ({specials, openingHours}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.sectionTitle}>Specials:</Text>
-      {specials?.length !== 0 &&
-        specials?.map((special, index) => (
+      <Accordion title={'Specials'}>
+        {specials?.map((special, index) => (
           <View key={index} style={styles.specialContainer}>
             <Text style={styles.specialName}>{special.name}</Text>
             <Text style={styles.text}>{special.description}</Text>
@@ -16,17 +17,19 @@ const RestaurantExtraDetails = ({specials, openingHours}) => {
               }>{`Valid Dates: ${special.validDates.start} - ${special.validDates.end}`}</Text>
           </View>
         ))}
+      </Accordion>
       {openingHours && (
         <>
-          <Text style={styles.sectionTitle}>Opening Hours:</Text>
-          <View style={styles.table}>
-            {Object.entries(openingHours).map(([day, hours]) => (
-              <View key={day} style={styles.row}>
-                <Text style={styles.cell}>{day}</Text>
-                <Text style={styles.cell}>{hours}</Text>
-              </View>
-            ))}
-          </View>
+          <Accordion title="Opening Hours:">
+            <View style={styles.table}>
+              {Object.entries(openingHours).map(([day, hours]) => (
+                <View key={day} style={styles.row}>
+                  <Text style={styles.cell}>{day}</Text>
+                  <Text style={styles.cell}>{hours}</Text>
+                </View>
+              ))}
+            </View>
+          </Accordion>
         </>
       )}
     </View>
@@ -47,19 +50,26 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   specialContainer: {
-    marginBottom: 15,
+    marginTop: 15,
+    backgroundColor: COLORS.DEFAULT,
+    padding: 15,
   },
   specialName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: FONTS.SEMIBOLD,
     color: '#333',
     marginBottom: 5,
+  },
+  text: {
+    fontSize: 16,
+    color: '#555',
+    fontFamily: FONTS.MEDIUM,
   },
   table: {
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
-    marginBottom: 15,
+    marginTop: 15,
   },
   row: {
     flexDirection: 'row',
@@ -70,7 +80,9 @@ const styles = StyleSheet.create({
   },
   cell: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 15,
     color: '#555',
+    fontFamily: FONTS.MEDIUM,
+    textTransform: 'capitalize',
   },
 });

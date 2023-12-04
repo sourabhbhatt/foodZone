@@ -8,14 +8,26 @@ const Button = ({
   title,
   rightIcon,
   iconType = 'AntDesign',
-  buttonStyle,
+  iconSize = 20,
+  style,
   textStyle,
 }) => {
   return (
-    <TouchableOpacity style={[styles.button, buttonStyle]} onPress={onPress}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        {justifyContent: rightIcon ? 'space-between' : 'center'},
+        style,
+      ]}
+      onPress={onPress}>
       <Text style={[styles.text, textStyle]}>{title}</Text>
       {!!rightIcon && (
-        <Icon type={iconType} name={rightIcon} size={20} color={COLORS.WHITE} />
+        <Icon
+          type={iconType}
+          name={rightIcon}
+          size={iconSize}
+          color={COLORS.WHITE}
+        />
       )}
     </TouchableOpacity>
   );
@@ -24,17 +36,18 @@ const Button = ({
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#3498db',
-    padding: 10,
+    padding: 5,
     borderRadius: 5,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     margin: 10,
+    height: 40,
   },
   text: {
-    color: 'white',
+    color: COLORS.WHITE,
     fontSize: 16,
     fontFamily: FONTS.MEDIUM,
+    marginHorizontal: 5,
   },
 });
 

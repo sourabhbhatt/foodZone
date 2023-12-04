@@ -12,6 +12,7 @@ import {
 import auth from '@react-native-firebase/auth';
 import {IMAGES} from '../../config';
 import ROUTES from '../../config/routes';
+import {Button} from '../../components';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -61,9 +62,9 @@ const Login = ({navigation}) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+
+      <Button title="Login" style={styles.loginButton} onPress={handleLogin} />
+
       <TouchableOpacity onPress={navigateToSignUp}>
         <Text style={styles.signUpText}>
           Don't have an account yet? Sign Up
@@ -97,16 +98,12 @@ const styles = StyleSheet.create({
   loginButton: {
     width: '100%',
     height: 40,
-    backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     marginBottom: 10,
   },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
+
   image: {
     width: 200,
     height: 200,

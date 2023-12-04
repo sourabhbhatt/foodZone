@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, Linking} from 'react-native';
 import {ImageCarousel, Loader, MenuFAB, StarRating} from '../../components';
 import firestore from '@react-native-firebase/firestore';
 import RestaurantExtraDetails from './RestaurantExtraDetails';
 import Reviews from './Reviews';
 import Menu from './Menu';
-import {COLORS} from '../../config';
+import {COLORS, FONTS, ROUTES} from '../../config';
 import Icon from '../../components/Icons';
 
 const RestaurantDetails = ({route}) => {
+  const scrollRef = React.useRef(null);
   const restaurantId = route?.params?.restaurant?.id;
   const [restaurant, setRestaurant] = useState(null);
 
@@ -29,10 +30,15 @@ const RestaurantDetails = ({route}) => {
     }
   };
 
+  const onMapPress = () =>
+    Linking.openURL(
+      `https://www.google.com/maps/search/?api=1&query=${restaurant?.coordinates?.latitude},${restaurant?.coordinates?.longitude}`,
+    );
+
   if (!restaurant) return <Loader isVisible={true} />;
   return (
     <>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView ref={scrollRef} contentContainerStyle={styles.container}>
         <ImageCarousel images={restaurant.photos} />
         <View style={styles.infoContainer}>
           <View>
@@ -42,16 +48,31 @@ const RestaurantDetails = ({route}) => {
               ', ',
             )}`}</Text>
           </View>
-          <Icon name="navigation" size={30} color={COLORS.PRIMARY} />
+          <Icon
+            type="FontAwesome5"
+            name="directions"
+            size={30}
+            color={COLORS.PRIMARY}
+            onPress={onMapPress}
+            style={{marginTop: 10}}
+          />
         </View>
-        <Menu menuItems={restaurant?.menuItems} />
+        <Menu
+          restaurantName={restaurant?.name}
+          menuItems={restaurant?.menuItems}
+        />
         <RestaurantExtraDetails
           specials={restaurant?.specials}
           openingHours={restaurant?.openingHours}
         />
         <Reviews reviews={restaurant?.reviews} />
       </ScrollView>
-      <MenuFAB menuItems={restaurant?.menuItems || []} />
+      <MenuFAB
+        menuItems={restaurant?.menuItems || []}
+        onMenuItemPress={(item, index) => {
+          scrollRef.current.scrollTo({y: 200 + index * 150, animated: true});
+        }}
+      />
     </>
   );
 };
@@ -76,15 +97,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   restaurantName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    fontSize: 22,
+    fontFamily: FONTS.SEMIBOLD_ITALIC,
     color: '#333',
   },
   text: {
     fontSize: 16,
     color: '#555',
-    marginBottom: 8,
   },
 });
 
