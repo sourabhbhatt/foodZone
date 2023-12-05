@@ -1,10 +1,10 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet, Image} from 'react-native';
-import firestore from '@react-native-firebase/firestore';
-import RestaurantCard from './RestaurantCard';
-import {COLORS, IMAGES, ROUTES} from '../../config';
 import Icon from '../../components/Icons';
+import RestaurantCard from './RestaurantCard';
 import auth from '@react-native-firebase/auth';
+import {COLORS, IMAGES, ROUTES} from '../../config';
+import firestore from '@react-native-firebase/firestore';
+import {View, FlatList, StyleSheet, Image} from 'react-native';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 
 const Home = ({navigation}) => {
   const [restaurants, setRestaurants] = useState([]);

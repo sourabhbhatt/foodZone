@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import AntIcon from 'react-native-vector-icons/AntDesign';
-import {width} from '../../utils';
 import {COLORS, FONTS} from '../../config';
+import AntIcon from 'react-native-vector-icons/AntDesign';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const Accordion = ({
   title = 'No Title Available',

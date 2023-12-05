@@ -1,5 +1,6 @@
 import React from 'react';
 import {isIOS} from '../../utils';
+import PropTypes from 'prop-types';
 import {StarRating} from '../../components';
 import {COLORS, FONTS, ROUTES} from '../../config';
 import {useNavigation} from '@react-navigation/native';
@@ -39,6 +40,10 @@ const RestaurantCard = ({restaurant}) => {
   );
 };
 
+RestaurantCard.propTypes = {
+  restaurant: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   card: {
     flex: 1,
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   shadow: {
-    shadowColor: '#171717',
+    shadowColor: COLORS.BLA,
     shadowOffset: {width: 1, height: 3},
     shadowOpacity: 0.2,
     shadowRadius: 2,

@@ -1,12 +1,12 @@
+import Menu from './Menu';
+import Reviews from './Reviews';
+import Icon from '../../components/Icons';
+import {COLORS, FONTS} from '../../config';
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image, ScrollView, Linking} from 'react-native';
-import {ImageCarousel, Loader, MenuFAB, StarRating} from '../../components';
 import firestore from '@react-native-firebase/firestore';
 import RestaurantExtraDetails from './RestaurantExtraDetails';
-import Reviews from './Reviews';
-import Menu from './Menu';
-import {COLORS, FONTS, ROUTES} from '../../config';
-import Icon from '../../components/Icons';
+import {View, Text, StyleSheet, ScrollView, Linking} from 'react-native';
+import {ImageCarousel, Loader, MenuFAB, StarRating} from '../../components';
 
 const RestaurantDetails = ({route}) => {
   const scrollRef = React.useRef(null);
@@ -80,7 +80,7 @@ const RestaurantDetails = ({route}) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.WHITE,
     paddingBottom: 20,
   },
   image: {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
-import Modal from 'react-native-modal';
 import {COLORS} from '../../config';
+import Modal from 'react-native-modal';
+import {View, ActivityIndicator, StyleSheet} from 'react-native';
 
 const Loading = ({isVisible, onBackdropPress}) => {
   return (

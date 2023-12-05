@@ -1,18 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import CartItem from './CartItem';
+import {Button} from '../../components';
 import {COLORS, FONTS, ROUTES} from '../../config';
-import {Button, Icon} from '../../components';
+import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {setCartInfo} from '../../redux/slices/userSlice';
-import CartItem from './CartItem';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
 
 const Cart = () => {
   const navigation = useNavigation();

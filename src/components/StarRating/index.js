@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {View} from 'react-native';
 import Icon from '../Icons';
+import {View} from 'react-native';
+import PropTypes from 'prop-types';
 import {COLORS} from '../../config';
 
 const StarRating = ({rating = 0, ratingFont = 20}) => {

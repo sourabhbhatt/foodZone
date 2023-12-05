@@ -1,10 +1,11 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {Accordion, Button, showToastMessage} from '../../components';
+import PropTypes from 'prop-types';
 import {COLORS, FONTS, ROUTES} from '../../config';
 import {useDispatch, useSelector} from 'react-redux';
-import {setCartInfo} from '../../redux/slices/userSlice';
 import {useNavigation} from '@react-navigation/native';
+import {setCartInfo} from '../../redux/slices/userSlice';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {Accordion, Button, showToastMessage} from '../../components';
 
 const Menu = ({menuItems, restaurantName}) => {
   const navigation = useNavigation();
@@ -73,6 +74,11 @@ const Menu = ({menuItems, restaurantName}) => {
       ))}
     </View>
   );
+};
+
+Menu.propTypes = {
+  menuItems: PropTypes.array.isRequired,
+  restaurantName: PropTypes.string.isRequired,
 };
 
 export default Menu;

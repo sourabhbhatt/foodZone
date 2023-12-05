@@ -1,7 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {Accordion} from '../../components';
+import PropTypes from 'prop-types';
 import {COLORS, FONTS} from '../../config';
+import {Accordion} from '../../components';
+import {StyleSheet, Text, View} from 'react-native';
 
 const RestaurantExtraDetails = ({specials, openingHours}) => {
   return (
@@ -34,6 +35,11 @@ const RestaurantExtraDetails = ({specials, openingHours}) => {
       )}
     </View>
   );
+};
+
+RestaurantExtraDetails.propTypes = {
+  specials: PropTypes.array,
+  openingHours: PropTypes.object,
 };
 
 export default RestaurantExtraDetails;

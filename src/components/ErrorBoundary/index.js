@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {StyleSheet, Image, Text, View, SafeAreaView} from 'react-native';
 import {height} from '../../utils';
+import React, {Component} from 'react';
 import {COLORS, FONTS, IMAGES} from '../../config';
+import {StyleSheet, Image, Text, View, SafeAreaView} from 'react-native';
 
 class ErrorBoundary extends Component {
   constructor() {
@@ -13,8 +13,6 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error) {
-    // crashlytics().recordError(error);
-    // crashlytics().log(JSON.stringify(error));
     this.setState({hasError: true, error: error});
   }
   render() {
@@ -27,13 +25,6 @@ class ErrorBoundary extends Component {
               <Text style={style.errorTitle}> Oops .... ! </Text>
               <Text style={style.errorDesc}> Something went wrong. </Text>
               <Text style={style.errorDesc}> Sorry about that. </Text>
-              {/* {this.props.ENV !== 'PROD' && this.state.error && (
-                <ScrollView style={style.scrollContainer}>
-                  <Text style={style.errorCode}>
-                    {JSON.stringify(this.state.error)}
-                  </Text>
-                </ScrollView>
-              )} */}
             </View>
           </View>
         </SafeAreaView>

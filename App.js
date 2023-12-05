@@ -2,8 +2,8 @@ import {useSelector} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import React, {useEffect, useState} from 'react';
 import AuthStack from './src/navigation/AuthStack.js';
-import MainStack from './src/navigation/MainStack';
-import {ErrorBoundary, Toast} from './src/components';
+import MainStack from './src/navigation/MainStack.js';
+import {ErrorBoundary, Toast} from './src/components/index.js';
 import {
   NavigationContainer,
   createNavigationContainerRef,

@@ -1,7 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Icon from '../Icons';
 import {COLORS, FONTS} from '../../config';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const Button = ({
   onPress,

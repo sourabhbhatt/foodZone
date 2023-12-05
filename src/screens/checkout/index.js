@@ -1,4 +1,3 @@
-// CheckoutPage.js
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
@@ -13,7 +12,7 @@ const CheckoutPage = ({navigation}) => {
   const cartInfo = useSelector(state => state?.user?.cartInfo);
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
 
-  // Group items by restaurantName
+  /*  Group items by restaurantName */
   const groupedItems = {};
   cartInfo.forEach(item => {
     if (!groupedItems[item.restaurantName]) {

@@ -1,7 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {StarRating} from '../../components';
+import PropTypes from 'prop-types';
 import {COLORS, FONTS} from '../../config';
+import {StarRating} from '../../components';
+import {StyleSheet, Text, View} from 'react-native';
 
 const Reviews = ({reviews}) => {
   return (
@@ -17,6 +18,10 @@ const Reviews = ({reviews}) => {
       ))}
     </View>
   );
+};
+
+Reviews.propTypes = {
+  reviews: PropTypes.array,
 };
 
 export default Reviews;

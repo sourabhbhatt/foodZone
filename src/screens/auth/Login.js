@@ -7,10 +7,9 @@ import {
   StyleSheet,
   Image,
   Animated,
-  ScrollView,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import {IMAGES} from '../../config';
+import {COLORS, FONTS, IMAGES} from '../../config';
 import ROUTES from '../../config/routes';
 import {Button} from '../../components';
 
@@ -83,14 +82,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: FONTS.SEMIBOLD,
     marginBottom: 20,
   },
   input: {
     width: '100%',
     height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: FONTS.BORDER,
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 15,
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   signUpText: {
-    color: 'blue',
+    color: COLORS.BLUE,
   },
 });
 

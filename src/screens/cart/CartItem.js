@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import PropTypes from 'prop-types';
 import {Icon} from '../../components';
 import {COLORS, FONTS, ROUTES} from '../../config';
 import {useNavigation} from '@react-navigation/native';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 const CartItem = ({
   item,
@@ -61,6 +62,14 @@ const CartItem = ({
   );
 };
 
+CartItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  decrementQuantity: PropTypes.func.isRequired,
+  incrementQuantity: PropTypes.func.isRequired,
+};
+
 const styles = StyleSheet.create({
   cartItem: {
     flex: 1,
@@ -70,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     margin: 5,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: COLORS.BORDER,
     borderRadius: 5,
     padding: 10,
   },
