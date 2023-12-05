@@ -12,6 +12,7 @@ const RestaurantDetails = ({route}) => {
   const scrollRef = React.useRef(null);
   const restaurantId = route?.params?.restaurant?.id;
   const [restaurant, setRestaurant] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getRestaurantDetails();
@@ -27,6 +28,8 @@ const RestaurantDetails = ({route}) => {
       setRestaurant(restaurantDetails);
     } catch (error) {
       console.error('Error fetching restaurant details:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,7 +41,11 @@ const RestaurantDetails = ({route}) => {
   if (!restaurant) return <Loader isVisible={true} />;
   return (
     <>
-      <ScrollView ref={scrollRef} contentContainerStyle={styles.container}>
+      <Loader isVisible={isLoading} />
+      <ScrollView
+        ref={scrollRef}
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}>
         <ImageCarousel images={restaurant.photos} />
         <View style={styles.infoContainer}>
           <View>

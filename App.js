@@ -8,7 +8,8 @@ import {
   NavigationContainer,
   createNavigationContainerRef,
 } from '@react-navigation/native';
-import {KeyboardAvoidingView} from 'react-native';
+import {KeyboardAvoidingView, StatusBar} from 'react-native';
+import COLORS from './src/config/colors.jsx';
 export const navigationRef = createNavigationContainerRef();
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
   if (initializing) return null;
   return (
     <ErrorBoundary>
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.WHITE} />
       <NavigationContainer ref={navigationRef}>
         <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
           {user ? <MainStack /> : <AuthStack />}

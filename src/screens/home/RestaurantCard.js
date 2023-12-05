@@ -6,7 +6,7 @@ import {COLORS, FONTS, ROUTES} from '../../config';
 import {useNavigation} from '@react-navigation/native';
 import {Text, TouchableOpacity, StyleSheet, Image, View} from 'react-native';
 
-const RestaurantCard = ({restaurant}) => {
+const RestaurantCard = ({restaurant, index}) => {
   const navigation = useNavigation();
 
   const onPressCard = () =>
@@ -14,10 +14,12 @@ const RestaurantCard = ({restaurant}) => {
 
   return (
     <TouchableOpacity
-      style={styles.card}
       activeOpacity={0.7}
-      onPress={onPressCard}>
+      onPress={onPressCard}
+      style={styles.card}
+      key={index}>
       <Image source={{uri: restaurant.image}} style={styles.image} />
+
       <View style={styles.infoContainer}>
         <View style={styles.header}>
           <Text style={styles.restaurantName}>{restaurant.name}</Text>

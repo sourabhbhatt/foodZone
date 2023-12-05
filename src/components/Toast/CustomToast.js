@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {COLORS, FONTS, IMAGES} from '../../config';
+import Icon from '../Icons';
 
 const iconMapping = {
-  success: IMAGES.SAD_ROBOT,
-  error: IMAGES.SAD_ROBOT,
-  warning: IMAGES.SAD_ROBOT,
-  info: IMAGES.SAD_ROBOT,
-  favorite: IMAGES.SAD_ROBOT,
+  success: 'check-circle',
+  error: 'exclamation-circle',
+  warning: 'exclamation-triangle',
+  info: 'info-circle',
+  favorite: 'heart',
 };
 
 const CustomToast = ({
@@ -74,9 +75,11 @@ const CustomToast = ({
           toastStyles.toastContainer,
         ]}>
         <View style={type === 'favorite' ? styles.imageContainer : {}}>
-          <Image
-            source={image ? {uri: image} : iconMapping[type]}
-            style={[styles.image, toastStyles.image]}
+          <Icon
+            type="FontAwesome5"
+            name={iconMapping[type]}
+            size={22}
+            color={COLORS[type.toUpperCase()]}
           />
         </View>
         <View style={[styles.infoBox, toastStyles.infoBox]}>

@@ -30,9 +30,8 @@ const Cart = () => {
     if (!currentItem) return;
     let updatedItem = {...currentItem};
     updatedItem.quantity = updatedItem.quantity + 1;
-    console.log('updatedItem', updatedItem);
     const newCartInfo = cartInfo.map(e =>
-      e.id === item?.id ? updatedItem : item,
+      e.id === item?.id ? updatedItem : e,
     );
     dispatch(setCartInfo(newCartInfo));
   };
@@ -47,7 +46,7 @@ const Cart = () => {
     let updatedItem = {...currentItem};
     updatedItem.quantity = updatedItem.quantity - 1;
     const newCartInfo = cartInfo.map(e =>
-      e.id === item?.id ? updatedItem : item,
+      e.id === item?.id ? updatedItem : e,
     );
     dispatch(setCartInfo(newCartInfo));
   };

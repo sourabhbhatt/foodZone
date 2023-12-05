@@ -3,11 +3,13 @@ import RestaurantCard from './RestaurantCard';
 import auth from '@react-native-firebase/auth';
 import {COLORS, IMAGES, ROUTES} from '../../config';
 import firestore from '@react-native-firebase/firestore';
-import {View, FlatList, StyleSheet, Image} from 'react-native';
+import {View, FlatList, StyleSheet, Image, Text} from 'react-native';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {Loader} from '../../components';
 
 const Home = ({navigation}) => {
-  const [restaurants, setRestaurants] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [restaurants, setRestaurants] = useState(null);
 
   const onLogout = () => {
     auth()
@@ -23,6 +25,7 @@ const Home = ({navigation}) => {
           name="logout"
           color={COLORS.PRIMARY}
           onPress={onLogout}
+          style={{marginRight: 10}}
         />
       ),
 
@@ -51,6 +54,8 @@ const Home = ({navigation}) => {
         setRestaurants(restaurantList);
       } catch (error) {
         console.error('Error fetching restaurants:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -59,16 +64,23 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={restaurants}
-        keyExtractor={item => item.id}
-        ListHeaderComponent={
-          <Image source={IMAGES.LOGO} style={styles.image} />
-        }
-        renderItem={({item}) => <RestaurantCard restaurant={item} />}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.restaurantList}
-      />
+      <Loader isVisible={isLoading} />
+      {restaurants?.length !== 0 ? (
+        <FlatList
+          data={restaurants}
+          keyExtractor={(item, i) => i.toString()}
+          ListHeaderComponent={
+            <Image source={IMAGES.LOGO} style={styles.image} />
+          }
+          renderItem={({item, index}) => (
+            <RestaurantCard restaurant={item} index={index} />
+          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.restaurantList}
+        />
+      ) : (
+        <Text>No restaurants found</Text>
+      )}
     </View>
   );
 };

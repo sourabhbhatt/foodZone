@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, Image, StyleSheet, Dimensions} from 'react-native';
+import {COLORS} from '../../config';
 
 const ImageCarousel = ({images}) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: 250,
     resizeMode: 'cover',
+    opacity: 0.9,
   },
   pagination: {
     flexDirection: 'row',
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#888',
+    backgroundColor: '#E53935',
     margin: 5,
   },
 });

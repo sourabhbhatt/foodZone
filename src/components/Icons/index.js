@@ -1,20 +1,20 @@
 import React from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Entypo from 'react-native-vector-icons/Entypo';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Foundation from 'react-native-vector-icons/Foundation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Octicons from 'react-native-vector-icons/Octicons';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import Zocial from 'react-native-vector-icons/Zocial';
 import PropTypes from 'prop-types';
 import {TouchableOpacity} from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Zocial from 'react-native-vector-icons/Zocial';
+import Octicons from 'react-native-vector-icons/Octicons';
+import Feather from 'react-native-vector-icons/Feather';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Foundation from 'react-native-vector-icons/Foundation';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Icon = ({
   name = 'language',
@@ -48,9 +48,6 @@ const Icon = ({
       break;
     case 'FontAwesome5':
       CustomIcon = FontAwesome5;
-      break;
-    case 'FontAwesome5Brands':
-      CustomIcon = FontAwesome5Brands;
       break;
     case 'Fontisto':
       CustomIcon = Fontisto;
@@ -90,7 +87,7 @@ const Icon = ({
 Icon.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   color: PropTypes.string,
   size: PropTypes.number,
   onPress: PropTypes.func,
