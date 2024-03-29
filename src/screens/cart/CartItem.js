@@ -98,11 +98,13 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.MEDIUM,
     marginTop: 5,
     fontSize: 16,
+    color: COLORS.TITLE,
   },
   price: {
     marginBottom: 2,
     fontFamily: FONTS.REGULAR,
     fontSize: 14,
+    color: COLORS.SUB_TITLE,
   },
   // quantity
   quantityContainer: {
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: FONTS.REGULAR,
     paddingHorizontal: 10,
+    color: COLORS.BLACK,
   },
   //button
   remove: {

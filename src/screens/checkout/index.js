@@ -51,7 +51,7 @@ const Checkout = ({navigation}) => {
               <View style={styles.itemContainer}>
                 {groupedItems[restaurantName].map((item, index) => (
                   <View key={index} style={styles.itemRow}>
-                    <Text style={styles.text}>{`${item?.name} (${
+                    <Text style={styles.itemName}>{`${item?.name} (${
                       item?.quantity || 1
                     })`}</Text>
                     <Text style={styles.text}>₹{item?.price}</Text>
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: FONTS.SEMIBOLD,
     marginBottom: 10,
+    color: COLORS.TITLE,
   },
   itemContainer: {
     borderWidth: 1,
@@ -108,13 +109,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 5,
   },
+  itemName: {
+    fontSize: 14,
+    fontFamily: FONTS.MEDIUM,
+    color: COLORS.SUB_TITLE,
+  },
   text: {
     fontSize: 14,
     fontFamily: FONTS.REGULAR,
+    color: COLORS.SUB_TITLE,
   },
   totalText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: FONTS.SEMIBOLD,
+    color: COLORS.TITLE,
     marginTop: 20,
     textAlign: 'center',
   },
@@ -123,7 +131,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   paymentPopup: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.WHITE,
     padding: 20,
     borderRadius: 10,
     justifyContent: 'center',
@@ -133,6 +141,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: FONTS.SEMIBOLD,
     marginBottom: 10,
+    color: COLORS.TITLE,
   },
   row: {
     flexDirection: 'row',

@@ -49,8 +49,13 @@ const styles = StyleSheet.create({
   },
   reviewUser: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: FONTS.SEMIBOLD,
     marginBottom: 5,
-    color: '#555',
+    color: COLORS.SUB_TITLE,
+  },
+  text: {
+    fontSize: 14,
+    fontFamily: FONTS.REGULAR,
+    color: COLORS.SUB_TITLE,
   },
 });

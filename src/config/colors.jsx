@@ -5,7 +5,7 @@ const COLORS = {
   BORDER: '#EFEFEF',
   YELLOW: '#FFCB05',
   RED: '#ff4545',
-
+  BLACK: '#000000',
   // Custom Colors
   PINK: '#EC407A',
   GREEN: 'rgba(34, 165, 126, 1)',

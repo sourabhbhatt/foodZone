@@ -17,7 +17,7 @@ const Accordion = ({
     <View style={styles.container}>
       <TouchableOpacity style={styles.titleContainer} onPress={toggleAccordion}>
         <Text style={styles.title}>{title}</Text>
-        <AntIcon name={rightIcon} size={15} color="#000" />
+        <AntIcon name={rightIcon} size={15} color={COLORS.BLACK} />
       </TouchableOpacity>
       {isVisible && children && children}
     </View>
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontFamily: FONTS.MEDIUM,
+    color: COLORS.BLACK,
   },
 });
 

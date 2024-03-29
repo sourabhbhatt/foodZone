@@ -25,7 +25,7 @@ const Menu = ({menuItems, restaurantName}) => {
     dispatch(setCartInfo(newCartInfo));
     showToastMessage({
       message: 'Item added to cart',
-      type: 'info',
+      type: 'success',
     });
   };
 

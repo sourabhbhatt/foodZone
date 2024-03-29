@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {COLORS, FONTS} from '../../config';
-import {isStrongPassword} from '../../utils';
+import {isStrongPassword, isValidEmail} from '../../utils';
+import {showToastMessage} from '../../components';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -19,11 +20,17 @@ const Signup = () => {
       .createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
         const user = userCredential.user;
-        console.log('Signed up:', user);
+        showToastMessage({
+          message: 'Signed up successfully',
+          type: 'success',
+        });
       })
       .catch(error => {
         const errorMessage = error.message;
-        console.error(errorMessage);
+        showToastMessage({
+          message: errorMessage,
+          type: 'error',
+        });
       });
   };
 
@@ -33,21 +40,26 @@ const Signup = () => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor={COLORS.GRAY}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
         maxLength={30}
       />
+      {email && !isValidEmail(email) && (
+        <Text style={styles.inValidEmail}>Email is not valid</Text>
+      )}
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor={COLORS.GRAY}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         maxLength={15}
       />
-      {!isStrongPassword(password) && (
+      {password && !isStrongPassword(password) && (
         <Text style={styles.strongPassword}>Password is not strong</Text>
       )}
       <TouchableOpacity style={styles.signupButton} onPress={handleSignUp}>
@@ -68,15 +80,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: FONTS.SEMIBOLD,
     marginBottom: 20,
+    color: COLORS.BLACK,
   },
   input: {
     width: '100%',
     height: 40,
     borderWidth: 1,
-    borderColor: COLORS.BORDER,
+    borderColor: COLORS.GRAY,
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 15,
+    color: COLORS.BLACK,
   },
   signupButton: {
     width: '100%',
@@ -89,12 +103,21 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLORS.WHITE,
     fontFamily: FONTS.SEMIBOLD,
+    fontSize: 16,
   },
   strongPassword: {
     color: COLORS.RED,
     fontFamily: FONTS.MEDIUM,
     marginBottom: 10,
     fontSize: 12,
+    alignSelf: 'flex-start',
+  },
+  inValidEmail: {
+    color: COLORS.RED,
+    fontFamily: FONTS.MEDIUM,
+    marginBottom: 10,
+    fontSize: 12,
+    alignSelf: 'flex-start',
   },
 });
 
